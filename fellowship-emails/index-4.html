@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APIs from A to Z - Presentation</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #000;
+    color: #e0e0e0;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Background gradients */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 70% 30%, rgba(255, 102, 0, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 30% 70%, rgba(255, 153, 0, 0.1) 0%, transparent 30%);
+    z-index: -2;
+}
+
+/* Keploy Logo */
+.keploy-logo {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    height: 60px;
+    z-index: 1000;
+    filter: drop-shadow(0 0 5px rgba(255, 140, 0, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.keploy-logo:hover {
+    transform: scale(1.05);
+}
+
+.presentation-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.slide {
+    width: 90%;
+    max-width: 1200px;
+    height: 90%;
+    background: rgba(20, 20, 20, 0.7);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 165, 0, 0.1);
+    padding: 60px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.slide.active {
+    display: flex;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0.8; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.slide h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #ff8c00;
+    text-shadow: 0 2px 10px rgba(255, 140, 0, 0.2);
+}
+
+.slide h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+    color: #ffa64d;
+}
+
+.slide h3 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #ff9933;
+}
+
+.slide p {
+    font-size: 1.4rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #d1d1d1;
+}
+
+.slide ul {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    padding-left: 40px;
+    color: #d1d1d1;
+}
+
+.slide li {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.slide li::before {
+    content: "•";
+    color: #ff8c00;
+    font-weight: bold;
+    font-size: 1.5rem;
+    position: absolute;
+    left: -25px;
+    top: -2px;
+}
+
+.code-block {
+    background: rgba(10, 10, 10, 0.6);
+    border: 1px solid rgba(255, 165, 0, 0.15);
+    border-radius: 10px;
+    padding: 25px;
+    margin: 20px 0;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    color: #f0f0f0;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.navigation {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    z-index: 1000;
+}
+
+.nav-btn {
+    background: rgba(255, 140, 0, 0.15);
+    border: 1px solid rgba(255, 165, 0, 0.2);
+    border-radius: 50px;
+    padding: 15px 30px;
+    color: #ffa64d;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    font-weight: 500;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 140, 0, 0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 140, 0, 0.1);
+}
+
+.nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.slide-counter {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    background: rgba(20, 20, 20, 0.7);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 165, 0, 0.1);
+    color: #ffa64d;
+    font-weight: 500;
+}
+
+.emoji {
+    font-size: 1.8rem;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.highlight {
+    color: #ff8c00;
+    font-weight: bold;
+    text-shadow: 0 2px 8px rgba(255, 140, 0, 0.2);
+}
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.center-content {
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 1.6rem;
+    color: #ff9933;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.large-emoji {
+    font-size: 4rem;
+    display: block;
+    text-align: center;
+    margin: 20px 0;
+    filter: drop-shadow(0 2px 5px rgba(255, 140, 0, 0.3));
+}
+
+@media (max-width: 768px) {
+    .slide {
+        padding: 30px;
+    }
+    
+    .slide h1 {
+        font-size: 2.5rem;
+    }
+    
+    .slide h2 {
+        font-size: 2rem;
+    }
+    
+    .slide h3 {
+        font-size: 1.8rem;
+    }
+    
+    .slide p, .slide ul {
+        font-size: 1.1rem;
+    }
+    
+    .two-column {
+        grid-template-columns: 1fr;
+    }
+    
+    .nav-btn {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+    
+    .keploy-logo {
+        height: 30px;
+        top: 15px;
+        left: 15px;
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(20, 20, 20, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 140, 0, 0.4);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 140, 0, 0.6);
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Keploy Logo -->
+<img src="https://keploy.io/images/logo.svg" alt="Keploy Logo" class="keploy-logo">
+
+<div class="presentation-container">
+<!-- Slide 1: Title -->
+<div class="slide active">
+<div class="center-content">
+<h1>APIs from A to Z</h1>
+<p class="subtitle">Understanding the Building Blocks of Modern Software</p>
+<div class="large-emoji">🚀</div>
+<p style="font-size: 1.8rem; margin-top: 40px;">Keploy API Fellowship Session</p>
+<p style="font-size: 1.4rem; color: #ff9933;">Theory & Fundamentals</p>
+</div>
+</div>
+
+<!-- Slide 2: What Can You Build -->
+<div class="slide">
+<h2>What Can You Build with APIs?</h2>
+<div class="center-content">
+<h3>The Power of APIs - Real Examples:</h3>
+<ul style="text-align: left; max-width: 800px; margin: 0 auto;">
+<li><span class="emoji">🎮</span><strong>Gaming</strong>: Use Playroom Kit APIs to create multiplayer games in minutes</li>
+<li><span class="emoji">📱</span><strong>Social Apps</strong>: Build custom Instagram experiences and analytics dashboards</li>
+<li><span class="emoji">⚡</span><strong>Developer Tools</strong>: GitHub APIs for automated deployment and project management</li>
+<li><span class="emoji">🌐</span><strong>Everything Else</strong>: Weather apps, payment systems, AI chatbots, music players...</li>
+</ul>
+<p style="font-size: 2rem; margin-top: 40px; color: #ff9933;"><strong>The Secret? APIs make all of this possible!</strong></p>
+</div>
+</div>
+
+<!-- Slide 3: What is an API -->
+<div class="slide">
+<h2>What is an API?</h2>
+<div class="center-content">
+<h3><span class="highlight">API = Application Programming Interface</span></h3>
+<div style="margin: 40px 0;">
+<p><strong>Simple Definition:</strong></p>
+<p>An API is like a <span class="highlight">waiter in a restaurant</span></p>
+<ul style="text-align: left; max-width: 600px; margin: 20px auto;">
+<li>You (the app) tell the waiter (API) what you want</li>
+<li>The waiter goes to the kitchen (server/database)</li>
+<li>The waiter brings back exactly what you ordered</li>
+</ul>
+</div>
+
+<div>
+<p><strong>Technical Definition:</strong></p>
+<p>A set of rules and protocols that allows different software applications to communicate with each other</p>
+</div>
+</div>
+</div>
+
+<!-- Slide 4: API Analogy -->
+<div class="slide">
+<h2>Real-World API Analogy</h2>
+<div class="center-content">
+<h3>Think of APIs like Electrical Outlets:</h3>
+<div class="two-column" style="margin: 40px 0;">
+<div>
+<div class="large-emoji">🔌</div>
+<h3>Standardized Interface</h3>
+<ul>
+<li>Every device knows how to plug in</li>
+<li>Don't need to understand the power grid</li>
+<li>Just plug in and get electricity</li>
+</ul>
+</div>
+<div>
+<div class="large-emoji">⚡</div>
+<h3>APIs Work Similarly</h3>
+<ul>
+<li>Standardized way to request data</li>
+<li>Don't need to understand backend complexity</li>
+<li>Just make a request and get a response</li>
+</ul>
+</div>
+</div>
+
+<p><strong>Example:</strong> When you use Google Maps in Uber, Uber uses Google Maps API to get location data</p>
+</div>
+</div>
+
+<!-- Slide 5: How APIs Work -->
+<div class="slide">
+<h2>How APIs Work - The Communication Flow</h2>
+<div class="center-content">
+<h3><span class="highlight">1. Request</span> → <span class="highlight">2. Processing</span> → <span class="highlight">3. Response</span></h3>
+<div style="margin: 40px 0;">
+<div style="margin-bottom: 30px;">
+<h3>Step 1: The Request</h3>
+<p>Your app sends a request to an API endpoint with URL, method, headers, and sometimes data</p>
+</div>
+<div style="margin-bottom: 30px;">
+<h3>Step 2: Processing</h3>
+<p>API receives, validates, processes the request and prepares the response</p>
+</div>
+<div>
+<h3>Step 3: The Response</h3>
+<p>API sends back structured data (usually JSON) with status codes</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Slide 6: Request-Response Example -->
+<div class="slide">
+<h2>API Request-Response Example</h2>
+<div class="center-content">
+<h3>Scenario: Getting weather information</h3>
+<div class="code-block">
+<strong>Request:</strong><br>
+                    GET https://api.weather.com/current?city=Mumbai<br>
+                    Headers: Authorization: Bearer your-api-key
+</div>
+
+<div class="code-block">
+<strong>Response:</strong><br>
+                    {<br>
+&nbsp;&nbsp;"city": "Mumbai",<br>
+&nbsp;&nbsp;"temperature": 28,<br>
+&nbsp;&nbsp;"condition": "Sunny",<br>
+&nbsp;&nbsp;"humidity": 65,<br>
+&nbsp;&nbsp;"status": "success"<br>
+                    }
+</div>
+
+<p><strong>What Happened:</strong> Your app asked for Mumbai weather, API processed it, and returned current weather data in JSON format</p>
+</div>
+</div>
+
+<!-- Slide 7: Types of APIs -->
+<div class="slide">
+<h2>Types of APIs - Overview</h2>
+<div class="center-content">
+<h3>APIs Come in Different Flavors:</h3>
+<ul style="text-align: left; max-width: 800px; margin: 40px auto;">
+<li><span class="emoji">🌐</span><strong>REST APIs</strong> - Most common, simple and scalable</li>
+<li><span class="emoji">📊</span><strong>GraphQL</strong> - Flexible data querying</li>
+<li><span class="emoji">🏢</span><strong>SOAP</strong> - Enterprise-grade with strict standards</li>
+<li><span class="emoji">⚡</span><strong>WebSockets</strong> - Real-time, two-way communication</li>
+<li><span class="emoji">🔗</span><strong>gRPC</strong> - High-performance for microservices</li>
+</ul>
+
+<p style="font-size: 1.6rem; margin-top: 40px;"><strong>Each type serves different needs and use cases</strong></p>
+</div>
+</div>
+
+<!-- Slide 8: REST APIs -->
+<div class="slide">
+<h2>REST APIs - The Most Popular</h2>
+<div class="center-content">
+<h3><span class="highlight">REST = Representational State Transfer</span></h3>
+<div class="two-column" style="margin: 40px 0;">
+<div>
+<h3>Key Principles:</h3>
+<ul>
+<li><strong>Stateless:</strong> Each request is independent</li>
+<li><strong>Resource-based:</strong> Everything has a URL</li>
+<li><strong>HTTP Methods:</strong> Standard verbs</li>
+<li><strong>JSON:</strong> Lightweight data format</li>
+</ul>
+</div>
+<div>
+<h3>Why REST is Popular:</h3>
+<ul>
+<li>Simple to understand</li>
+<li>Works great with web</li>
+<li>Scalable and cacheable</li>
+<li>Platform independent</li>
+</ul>
+</div>
+</div>
+
+<p><strong>Examples:</strong> Twitter API, GitHub API, Instagram API</p>
+</div>
+</div>
+
+<!-- Slide 9: GraphQL -->
+<div class="slide">
+<!-- <h2>GraphQL - Query What You Need</h2> -->
+<div class="center-content">
+<h3><span class="highlight">GraphQL = Query Language for APIs</span></h3>
+<div style="margin: 40px 0;">
+<h3>Key Features:</h3>
+<ul style="text-align: left; max-width: 600px; margin: 0 auto;">
+<li><strong>Single Endpoint:</strong> One URL for all operations</li>
+<li><strong>Flexible Queries:</strong> Request exactly what you need</li>
+<li><strong>Strongly Typed:</strong> Clear data structure definitions</li>
+<li><strong>Real-time:</strong> Built-in subscriptions</li>
+</ul>
+</div>
+
+<div class="code-block">
+<strong>Example Query:</strong><br>
+                    {<br>
+&nbsp;&nbsp;user(id: "123") {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;email<br>
+&nbsp;&nbsp;&nbsp;&nbsp;posts {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;likes<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+                    }
+</div>
+
+<p><strong>Used By:</strong> Facebook, GitHub, Shopify, Airbnb</p>
+</div>
+</div>
+
+<!-- Slide 10: HTTP Methods -->
+<div class="slide">
+<h2>HTTP Methods - The API Verbs</h2>
+<div class="center-content">
+<h3>CRUD Operations with HTTP Methods:</h3>
+<div style="margin: 40px 0;">
+<div style="margin-bottom: 25px;">
+<h3><span class="highlight">GET</span> - Read/Retrieve data</h3>
+<p>GET /users → Get all users | GET /users/123 → Get specific user</p>
+</div>
+<div style="margin-bottom: 25px;">
+<h3><span class="highlight">POST</span> - Create new resources</h3>
+<p>POST /users → Create new user</p>
+</div>
+<div style="margin-bottom: 25px;">
+<h3><span class="highlight">PUT</span> - Update/Replace entire resource</h3>
+<p>PUT /users/123 → Replace user completely</p>
+</div>
+<div>
+<h3><span class="highlight">DELETE</span> - Remove resources</h3>
+<p>DELETE /users/123 → Delete specific user</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Slide 11: Status Codes -->
+<div class="slide">
+<h2>HTTP Status Codes - API Communication</h2>
+<div class="center-content">
+<h3>Status Codes Tell the Story:</h3>
+<div class="two-column" style="margin: 40px 0;">
+<div>
+<h3><span style="color: #4CAF50;">2xx - Success</span></h3>
+<ul>
+<li><strong>200 OK</strong> → Request successful</li>
+<li><strong>201 Created</strong> → New resource created</li>
+<li><strong>204 No Content</strong> → Success, no data</li>
+</ul>
+<h3><span style="color: #FFA000;">4xx - Client Errors</span></h3>
+<ul>
+<li><strong>400 Bad Request</strong> → Invalid format</li>
+<li><strong>401 Unauthorized</strong> → Auth required</li>
+<li><strong>404 Not Found</strong> → Resource missing</li>
+</ul>
+</div>
+<div>
+<h3><span style="color: #F44336;">5xx - Server Errors</span></h3>
+<ul>
+<li><strong>500 Internal Server Error</strong> → Server broke</li>
+<li><strong>503 Service Unavailable</strong> → Server down</li>
+</ul>
+<div style="margin-top: 40px;">
+<p><strong>Remember:</strong></p>
+<p>Status codes help your app handle different scenarios appropriately</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Slide 12: Real Examples -->
+<div class="slide">
+<h2>Real API Examples You Use Daily</h2>
+<div class="center-content">
+<h3>APIs Power Your Favorite Apps:</h3>
+<ul style="text-align: left; max-width: 800px; margin: 40px auto;">
+<li><span class="emoji">📱</span><strong>Social Media Login</strong> - "Login with Google/Facebook" uses OAuth APIs</li>
+<li><span class="emoji">🗺️</span><strong>Maps in Food Delivery</strong> - Zomato/Swiggy use Google Maps API</li>
+<li><span class="emoji">💳</span><strong>Payment Processing</strong> - Razorpay, Stripe APIs handle transactions</li>
+<li><span class="emoji">🎵</span><strong>Music Streaming</strong> - Spotify API for playlist management</li>
+</ul>
+
+<div class="large-emoji">🔗</div>
+<p style="font-size: 2rem; color: #ff9933;"><strong>Everything is Connected: Modern apps are built by combining multiple APIs</strong></p>
+</div>
+</div>
+
+<!-- Slide 13: API Security -->
+<div class="slide">
+<h2>API Security Basics</h2>
+<div class="center-content">
+<h3>Keeping APIs Safe:</h3>
+<div class="two-column" style="margin: 40px 0;">
+<div>
+<h3>Authentication Methods:</h3>
+<ul>
+<li><strong>API Keys:</strong> Simple tokens</li>
+<li><strong>OAuth:</strong> Secure authorization</li>
+<li><strong>JWT Tokens:</strong> Stateless auth</li>
+</ul>
+</div>
+<div>
+<h3>Security Measures:</h3>
+<ul>
+<li><strong>HTTPS Only:</strong> Encrypt communication</li>
+<li><strong>Rate Limiting:</strong> Prevent abuse</li>
+<li><strong>Input Validation:</strong> Check data</li>
+<li><strong>Access Control:</strong> Limit permissions</li>
+</ul>
+</div>
+</div>
+
+<p><strong>Example:</strong> GitHub requires authentication for private repositories but allows public data without keys</p>
+</div>
+</div>
+
+<!-- Slide 14: Career Opportunities -->
+<div class="slide">
+<h2>API Career Opportunities</h2>
+<div class="center-content">
+<h3>APIs Open Doors to Exciting Careers:</h3>
+<ul style="text-align: left; max-width: 800px; margin: 40px auto;">
+<li><span class="emoji">💻</span><strong>Backend Developer</strong> - Design and build APIs, handle server-side logic</li>
+<li><span class="emoji">🔧</span><strong>API Developer/Engineer</strong> - Specialize in API architecture and performance</li>
+<li><span class="emoji">🚀</span><strong>DevOps Engineer</strong> - Deploy and maintain API infrastructure</li>
+<li><span class="emoji">🔗</span><strong>Integration Developer</strong> - Connect different systems via APIs</li>
+<li><span class="emoji">📊</span><strong>Technical Product Manager</strong> - Design API strategy and roadmaps</li>
+</ul>
+
+<div class="large-emoji">💼</div>
+<p style="font-size: 1.8rem; color: #ff9933;"><strong>The API economy is growing rapidly - endless opportunities await!</strong></p>
+</div>
+</div>
+
+<!-- Slide 15: Getting Started -->
+<div class="slide">
+<h2>Getting Started - Your Action Plan</h2>
+<div class="center-content">
+<h3>Steps to Master APIs:</h3>
+<div style="margin: 40px 0;">
+<div style="margin-bottom: 25px;">
+<h3><span class="highlight">1. Start Experimenting</span></h3>
+<p>Try public APIs (GitHub, OpenWeather) using Postman</p>
+</div>
+<div style="margin-bottom: 25px;">
+<h3><span class="highlight">2. Build Small Projects</span></h3>
+<p>Create a weather app, build a GitHub profile viewer</p>
+</div>
+<div style="margin-bottom: 25px;">
+<h3><span class="highlight">3. Learn by Building</span></h3>
+<p>Start with REST APIs, then explore GraphQL</p>
+</div>
+<div>
+<h3><span class="highlight">4. Keep Practicing</span></h3>
+<p>APIs are learned by doing, not just reading!</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Slide 16: Key Takeaways -->
+<div class="slide">
+<h2>Key Takeaways</h2>
+<div class="center-content">
+<h3>Remember These Core Concepts:</h3>
+<ul style="text-align: left; max-width: 900px; margin: 40px auto;">
+<li>✅ <strong>APIs are bridges</strong> that connect different software systems</li>
+<li>✅ <strong>REST is king</strong> - most common and beginner-friendly</li>
+<li>✅ <strong>HTTP methods map to actions</strong> - GET, POST, PUT, DELETE</li>
+<li>✅ <strong>Status codes communicate results</strong> - 200s good, 400s client issues, 500s server problems</li>
+<li>✅ <strong>JSON is the standard</strong> data format for modern APIs</li>
+<li>✅ <strong>Security matters</strong> - always authenticate and validate</li>
+<li>✅ <strong>Practice makes perfect</strong> - start building today!</li>
+</ul>
+</div>
+</div>
+
+<!-- Slide 17: Thank You -->
+<div class="slide">
+<div class="center-content">
+<h1>Thank You!</h1>
+<div class="large-emoji">🎯</div>
+<h3>You Now Understand:</h3>
+<ul style="text-align: left; max-width: 700px; margin: 40px auto;">
+<li>What APIs are and why they matter</li>
+<li>Different types of APIs and their uses</li>
+<li>How APIs work in the backend</li>
+<li>HTTP methods and status codes</li>
+<li>Best practices for API development</li>
+</ul>
+<div class="large-emoji">❓</div>
+<h2 style="color: #ff9933;">Questions & Discussion</h2>
+<p style="font-size: 1.8rem; margin-top: 30px;"><em>Ready to start building amazing things with APIs?</em></p>
+</div>
+</div>
+</div>
+
+<div class="slide-counter">
+<span id="current-slide">1</span> / <span id="total-slides">17</span>
+</div>
+
+<div class="navigation">
+<button class="nav-btn" id="prev-btn" onclick="changeSlide(-1)">← Previous</button>
+<button class="nav-btn" id="next-btn" onclick="changeSlide(1)">Next →</button>
+</div>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+document.getElementById('total-slides').textContent = totalSlides;
+
+function showSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (n + totalSlides) % totalSlides;
+    slides[currentSlide].classList.add('active');
+    document.getElementById('current-slide').textContent = currentSlide + 1;
+    // Update navigation buttons
+    document.getElementById('prev-btn').disabled = currentSlide === 0;
+    document.getElementById('next-btn').disabled = currentSlide === totalSlides - 1;
+}
+
+function changeSlide(direction) {
+    if (direction === 1 && currentSlide < totalSlides - 1) {
+        showSlide(currentSlide + 1);
+    } else if (direction === -1 && currentSlide > 0) {
+        showSlide(currentSlide - 1);
+    }
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === ' ') {
+        changeSlide(1);
+    } else if (e.key === 'ArrowLeft') {
+        changeSlide(-1);
+    }
+});
+
+// Initialize
+showSlide(0);
+</script>
+</body>
+</html>

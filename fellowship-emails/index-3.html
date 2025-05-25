@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instagram Reel Comments Extractor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #f5f5f5;
+    }
+    p {
+      max-width: 600px;
+      text-align: center;
+      color: #bbbbbb;
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+    input[type="text"], select {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #2c2c2c;
+      color: white;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    input[type="text"]::placeholder {
+      color: #999;
+    }
+    .button {
+      background: linear-gradient(135deg, #ff4ec5, #7c3aed);
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 0.5rem;
+    }
+    .button:hover {
+      opacity: 0.9;
+    }
+    .hidden {
+      display: none;
+    }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+    footer a {
+      color: #ff4ec5;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    table {
+      margin-top: 2rem;
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 800px;
+      overflow-x: auto;
+    }
+    th, td {
+      padding: 0.75rem 1rem;
+      border: 1px solid #444;
+      text-align: left;
+    }
+    th {
+      background-color: #222;
+    }
+    tr:nth-child(even) {
+      background-color: #1c1c1c;
+    }
+    #instructions {
+      max-width: 600px;
+      background-color: #1f1f1f;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #ccc;
+      white-space: pre-line;
+      user-select: text;
+    }
+    #instructions a {
+      background: linear-gradient(45deg, #7c3aed, #4c1d95);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+    #instructions a:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+      input[type="text"], select {
+        width: 100%;
+      }
+      .button {
+        width: 100%;
+        max-width: 400px;
+      }
+      table {
+        font-size: 0.8rem;
+      }
+      #instructions {
+        font-size: 0.85rem;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Instagram Reel Comments Extractor</h1>
+  <p>Enter a public Instagram Reel URL below to extract comments along with usernames and timestamps. After fetching, export the data to CSV or Excel.</p>
+
+  <input type="text" id="reelUrl" placeholder="Enter the reel URL" />
+  
+  <select id="apiOption" onchange="updateInstructions()">
+    <option value="apify">Apify</option>
+    <option value="rapidapi">RapidAPI</option>
+    <option value="custom">Custom</option>
+  </select>
+
+  <input type="text" id="apiKey" placeholder="Enter your API key here" />
+
+  <div id="instructions">
+    <!-- Instructions text inserted by JS -->
+  </div>
+
+  <button class="button" onclick="fetchComments()">Fetch Comments</button>
+
+  <div id="downloadButtons" class="hidden">
+    <button class="button" onclick="downloadCSV()">Download as CSV</button>
+    <button class="button" onclick="downloadExcel()">Export to Excel</button>
+  </div>
+
+  <table id="commentsTable" class="hidden">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Comment</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <footer>
+    Designed, developed and deployed by <a href="https://amaanbhati.tech">amaan</a>
+  </footer>
+
+  <script>
+    const instructionsEl = document.getElementById('instructions');
+    const apiOption = document.getElementById('apiOption');
+
+    function updateInstructions() {
+      const val = apiOption.value;
+      let text = '';
+      if (val === 'apify') {
+        text = `Apify:
+- Go to https://apify.com and create a free account.
+- Search for "Instagram Comment Scraper" actor.
+- Create a Task and copy your API token from the dashboard.
+
+Links:
+- https://apify.com
+- https://apify.com/store/actors/instagram-comment-scraper`;
+        // Make URLs clickable
+        text = text.replace(/(https?:\/\/[^\s]+)/g, (url) => {
+          return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+        });
+      } else if (val === 'rapidapi') {
+        text = `RapidAPI:
+- Visit https://rapidapi.com and sign up.
+- Search for Instagram scraping APIs.
+- Subscribe to a suitable API and get your key.
+
+Links:
+- https://rapidapi.com`;
+        text = text.replace(/(https?:\/\/[^\s]+)/g, (url) => {
+          return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+        });
+      } else {
+        text = `Custom:
+- Use your own API endpoints and keys.
+- Make sure the API returns comments data in JSON format compatible with the app.`;
+      }
+      instructionsEl.innerHTML = text;
+    }
+
+    updateInstructions(); // Initialize on page load
+
+    let commentsData = [];
+
+    async function fetchComments() {
+      const url = document.getElementById('reelUrl').value.trim();
+      const apiKey = document.getElementById('apiKey').value.trim();
+      const apiProvider = apiOption.value;
+
+      if (!url) return alert('Please enter a valid reel URL.');
+      if (!apiKey) return alert('Please enter your API key.');
+
+      alert("Fetching real comments... this may take a few seconds.");
+
+      // For demonstration: construct API URL based on provider - you must adapt this per your API specs
+      let apiUrl = '';
+      if (apiProvider === 'apify') {
+        // Example Apify API URL, replace YOUR_TASK_ID with your task ID
+        apiUrl = `https://api.apify.com/v2/actor-tasks/YOUR_TASK_ID/run-sync-get-dataset-items?token=${encodeURIComponent(apiKey)}&reelUrl=${encodeURIComponent(url)}`;
+      } else if (apiProvider === 'rapidapi') {
+        // You would build your RapidAPI request here
+        apiUrl = `https://your-rapidapi-endpoint?apiKey=${encodeURIComponent(apiKey)}&reelUrl=${encodeURIComponent(url)}`;
+      } else {
+        alert('Custom API option selected. Implement your API call accordingly.');
+        return;
+      }
+
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+
+        // Adapt this mapping according to your actual API response structure
+        commentsData = data.map(c => ({
+          username: c.ownerUsername || c.username || 'Unknown',
+          comment: c.text || c.comment || '',
+          timestamp: c.timestamp || c.created_time || ''
+        }));
+
+        if (commentsData.length === 0) {
+          alert('No comments found or unable to parse data.');
+          return;
+        }
+
+        populateTable();
+        document.getElementById('downloadButtons').classList.remove('hidden');
+        document.getElementById('commentsTable').classList.remove('hidden');
+      } catch (error) {
+        alert('Failed to fetch data. Check your API credentials or try again later.');
+        console.error(error);
+      }
+    }
+
+    function populateTable() {
+      const tbody = document.querySelector('#commentsTable tbody');
+      tbody.innerHTML = '';
+      commentsData.forEach(({ username, comment, timestamp }) => {
+        const row = `<tr><td>${escapeHtml(username)}</td><td>${escapeHtml(comment)}</td><td>${escapeHtml(timestamp)}</td></tr>`;
+        tbody.innerHTML += row;
+      });
+    }
+
+    function downloadCSV() {
+      const rows = [
+        ['Username', 'Comment', 'Timestamp'],
+        ...commentsData.map(c => [c.username, c.comment, c.timestamp])
+      ];
+      const csvContent = rows.map(e => e.map(escapeCsv).join(',')).join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', 'reel-comments.csv');
+      link.click();
+    }
+
+    function downloadExcel() {
+      let table = '<table><tr><th>Username</th><th>Comment</th><th>Timestamp</th></tr>';
+      commentsData.forEach(c => {
+        table += `<tr><td>${escapeHtml(c.username)}</td><td>${escapeHtml(c.comment)}</td><td>${escapeHtml(c.timestamp)}</td></tr>`;
+      });
+      table += '</table>';
+      const uri = 'data:application/vnd.ms-excel;base64,';
+      const base64 = s => window.btoa(unescape(encodeURIComponent(s)));
+      const href = uri + base64(table);
+      const link = document.createElement('a');
+      link.href = href;
+      link.download = 'reel-comments.xls';
+      link.click();
+    }
+
+    // Helpers to escape CSV and HTML to avoid injection issues
+    function escapeCsv(text) {
+      if (typeof text !== 'string') return text;
+      if (text.includes('"') || text.includes(',') || text.includes('\n')) {
+        return `"${text.replace(/"/g, '""')}"`;
+      }
+      return text;
+    }
+    function escapeHtml(text) {
+      if (typeof text !== 'string') return text;
+      return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>
