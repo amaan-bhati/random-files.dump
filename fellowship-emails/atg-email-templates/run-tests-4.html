@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f8fafc;
+  font-family: 'Inter', sans-serif;
+  color: #1f2937;
+}
+
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.logo {
+  margin-bottom: 20px;
+}
+
+.logo img {
+  width: 80px;
+  height: auto;
+}
+
+.header h2 {
+  font-size: 24px;
+  margin: 0;
+  color: #111827;
+}
+
+.header p {
+  margin-top: 8px;
+  color: #6b7280;
+  font-size: 15px;
+}
+
+.steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 2px;
+  
+}
+
+.steps-left {
+  flex: 1 1 60%;
+}
+
+.steps-left ol {
+  padding-left: 20px;
+  margin: 0;
+  color: #374151;
+}
+
+.steps-left li {
+  margin-bottom: 12px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.steps-left a {
+  color: #ff6f3c;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.cta {
+  margin-top: 28px;
+}
+
+.cta a {
+  background-color: #ff8c4c;
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(255, 111, 60, 0.3);
+  transition: background-color 0.2s ease;
+}
+
+.cta a:hover {
+  background-color: #e95a2b;
+}
+
+.mascot {
+  flex: 1 1 35%;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.mascot img {
+  max-width: 220px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border-radius: 8px;
+}
+
+.mascot img:hover {
+  transform: scale(1.05);
+}
+
+.mascot p {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.footer {
+  margin-top: 40px;
+  font-size: 13px;
+  color: #9ca3af;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .steps {
+    flex-direction: column;
+  }
+
+  .steps-left,
+  .mascot {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+
+  .steps-left ol {
+    padding-left: 0;
+  }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="logo">
+    <img src="/fellowship-emails/assets/images/keploy-logo-1.png" alt="Keploy Logo" />
+  </div>
+
+  <div class="header">
+    <h2>Your API Tests Are Ready! 🚀</h2>
+    <p>You’ve generated your API test cases. Now run them to get results in minutes.</p>
+  </div>
+
+  <div class="steps">
+    <div class="steps-left">
+      <ol>
+        <li>Go to <a href="https://app.keploy.io/api-testing/test-suites" target="_blank">Test Suites</a></li>
+        <li>Click <strong>"Run Tests"</strong> at the top - right</li>
+        <li>Wait or stop anytime - live progress will be shown</li>
+        <li>View full test report once complete</li>
+      </ol>
+
+      <div class="cta">
+        <a href="https://app.keploy.io/api-testing/test-suites" target="_blank">Run Your Tests Now</a>
+      </div>
+    </div>
+
+    <div class="mascot">
+      <a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID" target="_blank">
+        <img src="/fellowship-emails/assets/images/bunny-3.png" alt="Keploy Bunny Mascot" />
+        <p>Watch how it works →</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2025 Keploy - <a href="https://keploy.io" style="color:#9ca3af; text-decoration:none;">keploy.io</a>
+  </div>
+</div>
+</body>
+</html>

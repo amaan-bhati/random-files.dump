@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f8fafc;
+  font-family: 'Inter', sans-serif;
+  color: #1f2937;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+}
+.header h2 {
+  font-size: 24px;
+  margin: 0;
+  color: #111827;
+}
+.header p {
+  margin-top: 8px;
+  color: #6b7280;
+  font-size: 15px;
+}
+.step {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 32px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.step-content {
+  flex: 1 1 60%;
+}
+.step-content strong {
+  display: block;
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+.step-content p {
+  font-size: 15px;
+  color: #374151;
+  margin-bottom: 12px;
+}
+.step-content a.button {
+  display: inline-block;
+  background-color: #ff8c4c;
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(255, 111, 60, 0.3);
+  transition: background-color 0.2s ease;
+}
+.step-content a.button:hover {
+  background-color: #e95a2b;
+}
+.step-content p {
+  font-size: 13px;           /* reduced from 15px */
+  line-height: 1.9;          /* increased from 1.6 */
+  color: #374151;
+  margin-bottom: 14px;
+  letter-spacing: 0.1px;     /* slight spacing to improve legibility */
+}
+.step-image {
+  flex: 1 1 35%;
+  text-align: center;
+}
+.step-image img {
+  max-width: 220px;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+.step-image img:hover {
+  transform: scale(1.05);
+}
+.footer {
+  margin-top: 40px;
+  font-size: 13px;
+  color: #9ca3af;
+  text-align: center;
+}
+@media (max-width: 640px) {
+  .step {
+    flex-direction: column;
+  }
+  .step-content, .step-image {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h2>Your API Tests Are Ready 🚀</h2>
+    <p>You’ve generated your API test cases. Now run them to get results in minutes.</p>
+  </div>
+
+  <!-- Step 1 -->
+  <div class="step">
+    <div class="step-content">
+      <strong>Step 1: Navigate to Test Suites</strong>
+      <p>Go to the Keploy dashboard and open the Test Suites section to see your test cases.</p>
+      <a class="button" href="https://app.keploy.io/api-testing/test-suites" target="_blank">Go to Test Suites</a>
+    </div>
+    <div class="step-image">
+      <img src="/fellowship-emails/assets/images/bunny-img.png" alt="Step 1 Image">
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="step">
+    <div class="step-content">
+      <strong>Step 2: Click “Run Tests”</strong>
+      <p>Start the tests by clicking the "Run Tests" button located at the top-right corner.</p>
+      <a class="button" href="https://app.keploy.io/api-testing/test-suites" target="_blank">Run Tests</a>
+    </div>
+    <div class="step-image">
+      <img src="/fellowship-emails/assets/images/bunny-img.png" alt="Step 2 Image">
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="step">
+    <div class="step-content">
+      <strong>Step 3: Monitor Live Progress</strong>
+      <p>Watch your tests run in real-time and stop them if needed at any point.</p>
+      <a class="button" href="https://app.keploy.io/api-testing/test-suites" target="_blank">View Progress</a>
+    </div>
+    <div class="step-image">
+      <img src="/fellowship-emails/assets/images/bunny-high-five.png" alt="Step 3 Image">
+    </div>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="step">
+    <div class="step-content">
+      <strong>Step 4: View Full Report</strong>
+      <p>After tests complete, explore detailed results in your test report section.</p>
+      <a class="button" href="https://app.keploy.io/api-testing/test-suites" target="_blank">View Report</a>
+    </div>
+    <div class="step-image">
+      <img src="/fellowship-emails/assets/images/bunny-img.png" alt="Step 4 Image">
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2025 Keploy - <a href="https://keploy.io" style="color:#9ca3af; text-decoration:none;">keploy.io</a>
+  </div>
+</div>
+</body>
+</html>

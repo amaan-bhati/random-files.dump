@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your First Test - Keploy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8f9fa;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+
+
+        .logo {
+            position: relative;
+            z-index: 2;
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            letter-spacing: -0.5px;
+        }
+
+        .content {
+            padding: 40px 32px;
+            text-align: center;
+        }
+
+        .heading {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff9a56 0%, #ff8a42 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        .bold-header {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+            line-height: 1.3;
+            letter-spacing: -0.3px;
+        }
+
+        .description {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        .description-container {
+            max-width: 520px;
+            margin: 0 auto 32px auto;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255, 154, 86, 0.08) 0%, rgba(255, 173, 117, 0.06) 100%);
+            border: 1px solid rgba(255, 154, 86, 0.15);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .highlight-box .description {
+            margin-bottom: 0;
+            color: #444;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .steps-container {
+            background-color: #fff9f7;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .steps-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: #555;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #ff9a56 0%, #ff8a42 100%);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff9a56 0%, #ff8a42 100%);
+            color: white;
+            text-decoration: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 154, 86, 0.3);
+            letter-spacing: 0.3px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 154, 86, 0.4);
+            background: linear-gradient(135deg, #ff8a42 0%, #ff7a28 100%);
+        }
+
+        .footer {
+            background-color: #f8f9fa;
+            padding: 24px 32px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #8e8e93;
+            margin-bottom: 8px;
+        }
+
+        .footer-link {
+            color: #ff9a56;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .email-container {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .content {
+                padding: 32px 24px;
+            }
+
+            .header-img {
+                width: 100%;
+                border-radius: 8px;
+                margin-bottom: 20px;
+            }
+
+            .heading {
+                font-size: 20px;
+            }
+
+            .bold-header {
+                font-weight: 700;
+                background: linear-gradient(135deg, #ff9a56 0%, #ff8a42 100%);
+                font-size: 18px;
+            }
+
+            .description {
+                font-size: 15px;
+            }
+
+            .cta-button {
+                padding: 14px 28px;
+                font-size: 15px;
+            }
+
+            .footer {
+                padding: 20px 24px;
+            }
+
+            .steps-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-container">
+
+        <div class="content">
+            <img src="/fellowship-emails/assets/images/email-banner.png" alt="Keploy Banner" class="header-img" style="width: 100%; border-radius: 8px; margin-bottom: 20px;" />
+
+            <h1 class="heading">Hey! We noticed that you weren't able to create tests</h1>
+
+
+            <div class="description-container">
+                <div class="steps-container">
+                    <div class="steps-title">Generate tests in three easy steps:</div>
+
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <span>Enter your API endpoint</span>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <span>Provide your curl commands</span>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <span>Put your schema and click on generate</span>
+                    </div>
+                </div>
+            </div>
+
+            <a href="https://app.keploy.io" class="cta-button">Complete Your Test Setup</a>
+        </div>
+
+
+        <div class="footer">
+            <p class="footer-text">Still having trouble?</p>
+            <a href="https://docs.keploy.io" class="footer-link">Check Our Documentation</a>
+        </div>
+    </div>
+</body>
+
+</html>

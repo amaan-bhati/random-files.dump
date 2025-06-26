@@ -158,6 +158,25 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 82, 204, 0.4);
         }
+        .topic-list {
+            background-color: #fff0e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .topic-item {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+        .topic-item:before {
+            content: "•";
+            color: #ff6d00;
+            font-size: 24px;
+            position: absolute;
+            left: 5px;
+            top: -5px;
+        }
     </style>
 </head>
 <body>
@@ -171,16 +190,25 @@
                 alt="Keploy Mascot" class="mascot" />
         </div>
 
-        <h1>Ready for Tomorrow's Session? <span class="emoji">🚀</span></h1>
+        <h1>Ready for Day 2? <span class="emoji">🚀</span></h1>
         
         <p>Hi <span class="highlight">[First Name]</span>,</p>
         
-        <p>We're just one day away from another exciting session of the API Fellowship, and we'd love to have you join us!</p>
+        <p>We're just one day away from Day 2 of the API Fellowship—and we're excited to have you join us!</p>
         
         <div class="session-details">
-            <h2>Here's what's lined up:</h2>
+            <h2>Here's what's in store:</h2>
             <p><strong>Topic:</strong><br>
-            Amaan and Achanandhi will walk us through: <span class="highlight">What is Open Source Software, Git & Git Commands, GSoC, and an Introduction to Networking.</span></p>
+            Amaan and Achanandhi will take you through:</p>
+            
+            <div class="topic-list">
+                <div class="topic-item">What is an API?</div>
+                <div class="topic-item">Why do APIs matter?</div>
+                <div class="topic-item">A curated list of public APIs</div>
+                <div class="topic-item">How to use them in your own projects</div>
+            </div>
+            
+            <p>Plus: <span class="highlight">a live demo</span> and <span class="highlight">a home assignment</span> to sharpen your skills!</p>
             
             <p><strong>When:</strong> 7:00 PM – 8:00 PM IST<br>
             <strong>Where:</strong> We're going live on YouTube</p>
@@ -190,23 +218,23 @@
         
         <h2>Why you'll love it <span class="emoji">✨</span></h2>
         
-        <p>Amaan and Achanandhi have been through it all—from navigating open source communities to understanding the backbone of networking. You'll walk away with practical knowledge you can apply immediately.</p>
+        <p>Amaan and Achanandhi will break down complex concepts and show you how to build real projects using public APIs—perfect if you're just getting started or looking to build something cool.</p>
         
         <div class="highlight-box">
-            <p>And yes, there's a <strong>Live Q&A</strong> — so bring your questions!</p>
+            <p><strong>Live Q&A</strong> – Got questions? Bring them—we'll be answering them live!</p>
         </div>
         
         <img src="https://res.cloudinary.com/dqwbkjfuh/image/upload/v1747217704/Screenshot_2025-04-29-19-52-30-92_3a637037d35f95c5dbcdcc75e697ce91_plio4p.jpg"
             alt="Dev Meme" class="meme">
         
-        <p>We're building something meaningful here, together. Let's make this session one to remember. Don't miss it!</p>
+        <p>We're building something meaningful together. Let's make this session one to remember!</p>
         
         <div class="social-proof">
-            <p>200+ people grduated | 100% Free Learning | 25+ interns | 10 Full-time PPOs</p>
+            <p>200+ people graduated | 100% Free Learning | 25+ interns | 10 Full-time PPOs</p>
         </div>
         
         <div class="signature">
-            <p>Cheers,<br>Team Keploy</p>
+            <p>See you there,<br>The Keploy Team</p>
         </div>
         
         <div class="social-icons">
@@ -225,3 +253,4 @@
     </div>
 </body>
 </html>
+

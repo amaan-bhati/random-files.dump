@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign in template</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background-color: #f9fafb;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+    }
+    .header-img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .content-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .text-section {
+      flex: 1 1 250px;
+    }
+    .image-section {
+      flex: 1 1 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .image-section img {
+      max-width: 90%;
+      height: auto;
+    }
+    .title {
+      font-size: 28px;
+      color: #f97316;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .subtitle {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 16px;
+      color: #111827;
+    }
+    .body-text {
+      font-size: 16px;
+      color: #374151;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .btn {
+      display: inline-block;
+      background-color: #f97316;
+      color: white;
+      text-decoration: none;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .footer {
+      margin-top: 30px;
+      font-size: 13px;
+      color: #9ca3af;
+      text-align: center;
+    }
+
+    /* Responsive Fix */
+    @media (max-width: 600px) {
+      .content-row {
+        flex-direction: column;
+        align-items: center;
+      }
+      .image-section {
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="header-img" src="/fellowship-emails/assets/images/email-banner.png" alt="Welcome to Keploy" />
+
+    <div class="content-row">
+      <div class="text-section">
+        <h1 class="title">Welcome to Keploy!</h1>
+        <p class="subtitle">Your API testing just got smarter and faster!</p>
+        <p class="body-text">
+          You have unlocked the power of AI to automate your testing workflow, making it faster and more efficient than ever. Try creating 100+ test suites for your applications now!
+        </p>
+        <a href="https://app.keploy.io/login" class="btn">Sign in & Try Now!</a>
+      </div>
+
+      <div class="image-section">
+        <img src="/fellowship-emails/assets/images/mascot.png" alt="Keploy Mascot" />
+      </div>
+    </div>
+
+    <div class="footer">
+      © 2025 Keploy Inc. All rights reserved.
+    </div>
+  </div>
+</body>
+</html>
